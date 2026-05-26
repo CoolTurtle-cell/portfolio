@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mark Jerald Galban — Portfolio</title>
+
+    <link rel="icon" type="image/x-icon" href="resources/PortfolioPicture.jfif" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #f4f6fb;
+            --bg-card: #ffffff;
+            --text: #0f1623;
+            --text-muted: #5a6479;
+            --accent: #4a6fa5;
+            --accent-light: #7fa3d4;
+            --accent-soft: #dce8f5;
+            --gs: #b8cde8;
+            --gm: #c9d8ee;
+            --ge: #e8eef8;
+            --border: rgba(74, 111, 165, 0.15);
+            --shadow: 0 4px 24px rgba(74, 111, 165, 0.10);
+            --nav-h: 68px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-h);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5vw;
+            background: rgba(244, 246, 251, 0.88);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            color: var(--accent);
+            letter-spacing: 0.04em;
+        }
+
+        .nav-logo::before,
+        .nav-logo::after {
+            content: 'MG';
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.04em;
+            pointer-events: none;
+        }
+
+        .nav-logo::before {
+            color: rgba(74, 111, 165, 0.35);
+            animation: echo1 3s ease-in-out infinite;
+        }
+
+        .nav-logo::after {
+            color: rgba(74, 111, 165, 0.15);
+            animation: echo2 3s ease-in-out infinite;
+        }
+
+        @keyframes echo1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+                opacity: .35
+            }
+
+            50% {
+                transform: translate(4px, 2px);
+                opacity: .55
+            }
+        }
+
+        @keyframes echo2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+                opacity: .15
+            }
+
+            50% {
+                transform: translate(8px, 4px);
+                opacity: .25
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.25s;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 6px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        .nav-toggle.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: var(--nav-h);
+                left: 0;
+                right: 0;
+                background: rgba(244, 246, 251, 0.98);
+                backdrop-filter: blur(18px);
+                padding: 1.5rem 6vw 2rem;
+                gap: 0;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 8px 32px rgba(74, 111, 165, 0.1);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li {
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 0.85rem 0;
+                font-size: 1rem;
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+        }
+
+        /* ── HERO ── */
+        #home {
+            min-height: 100svh;
+            padding-top: var(--nav-h);
+            padding-left: 4vw;
+            padding-right: 4vw;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--gs) 0%, var(--gm) 45%, var(--ge) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        #home::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 40vw;
+            height: 40vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(74, 111, 165, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2vw 4rem;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: rgba(74, 111, 165, 0.13);
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 1.6rem;
+            width: fit-content;
+            opacity: 0;
+            animation: fadeUp 0.7s 0.2s forwards;
+        }
+
+        .hero-name-wrap {
+            position: relative;
+            margin-bottom: 1.4rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.4s forwards;
+        }
+
+        .hero-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+            line-height: 1.04;
+            color: var(--text);
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-name-echo1,
+        .hero-name-echo2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+            line-height: 1.04;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .hero-name-echo1 {
+            color: rgba(74, 111, 165, 0.22);
+            z-index: 2;
+            animation: nameEcho1 4s ease-in-out infinite;
+        }
+
+        .hero-name-echo2 {
+            color: rgba(74, 111, 165, 0.10);
+            z-index: 1;
+            animation: nameEcho2 4s ease-in-out infinite;
+        }
+
+        @keyframes nameEcho1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+                opacity: .22
+            }
+
+            50% {
+                transform: translate(6px, 3px);
+                opacity: .38
+            }
+        }
+
+        @keyframes nameEcho2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+                opacity: .10
+            }
+
+            50% {
+                transform: translate(12px, 6px);
+                opacity: .18
+            }
+        }
+
+        .hero-sub {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 460px;
+            margin-bottom: 2.4rem;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.6s forwards;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.8s forwards;
+        }
+
+        .hero-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: fadeUp 1s 0.5s forwards;
+        }
+
+        .hero-visual-card {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 28px;
+            padding: 2.4rem 2rem;
+            box-shadow: 0 8px 40px rgba(74, 111, 165, 0.15), 0 2px 8px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .hvc-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hvc-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 400;
+            flex-shrink: 0;
+        }
+
+        .hvc-id {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .hvc-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .hvc-role {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .hvc-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4caf82;
+            margin-left: auto;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 3px rgba(76, 175, 130, 0.2);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 3px rgba(76, 175, 130, 0.2)
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(76, 175, 130, 0.1)
+            }
+        }
+
+        .hvc-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .hvc-stat {
+            background: var(--accent-soft);
+            border-radius: 14px;
+            padding: 0.85rem 0.6rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hvc-stat-num {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .hvc-stat-label {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 600;
+        }
+
+        .hvc-skills-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .hvc-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .hvc-chip {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .hvc-bar-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .hvc-bar-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hvc-bar-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hvc-bar-name {
+            font-size: 0.78rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .hvc-bar-pct {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .hvc-bar-track {
+            height: 6px;
+            border-radius: 10px;
+            background: rgba(74, 111, 165, 0.12);
+            overflow: hidden;
+        }
+
+        .hvc-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            transform-origin: left;
+            animation: barGrow 1.2s cubic-bezier(.4, 0, .2, 1) forwards;
+            transform: scaleX(0);
+        }
+
+        @keyframes barGrow {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(22px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            animation: fadeUp 1s 1.2s forwards;
+        }
+
+        .scroll-hint span {
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .scroll-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            animation: scrollBounce 1.4s ease-in-out infinite;
+        }
+
+        @keyframes scrollBounce {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(6px)
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .hero-left {
+                align-items: center;
+            }
+
+            .hero-sub {
+                max-width: 100%;
+            }
+
+            .hero-right {
+                display: none;
+            }
+        }
+
+        /* ── SECTIONS UNIVERSAL ── */
+        section {
+            padding: 96px 5vw;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.9rem, 4.5vw, 3rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .section-desc {
+            font-size: 0.97rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            line-height: 1.75;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        /* ── ABOUT ── */
+        #about {
+            background: #fff;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+            margin-top: 3.5rem;
+            align-items: start;
+        }
+
+        .about-photo-wrap {
+            position: relative;
+        }
+
+        .about-deco {
+            position: absolute;
+            top: -16px;
+            left: -16px;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: var(--accent-soft);
+            z-index: 0;
+        }
+
+        .about-photo-placeholder {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 24px;
+            background: linear-gradient(145deg, var(--gs), var(--ge));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border: 2px dashed var(--accent-light);
+        }
+
+        .about-photo-placeholder svg {
+            opacity: 0.4;
+        }
+
+        .about-photo-placeholder span {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .about-photo {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 24px;
+            object-fit: cover;
+            border: 2px solid var(--border);
+            display: block;
+        }
+
+        .about-text h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            margin-bottom: 12px;
+        }
+
+        .about-text p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+            margin-bottom: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* ── PROJECTS ── */
+        #projects {
+            background: var(--bg);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin: 2.2rem 0 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 8px 20px;
+            border-radius: 100px;
+            border: 1.5px solid var(--border);
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.83rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .tab-btn.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .subtabs {
+            display: flex;
+            gap: 6px;
+            margin: -0.6rem 0 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .subtab-btn {
+            padding: 5px 16px;
+            border-radius: 100px;
+            border: 1.5px solid var(--border);
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .subtab-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .subtab-btn.active {
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        .projects-slider-container {
+            position: relative;
+            width: 100%;
+        }
+
+        /* ── SLIDER CARD ANIMATION STYLE OVERHAUL ── */
+        .project-slider-card {
+            background: #fff;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            padding: 2.5rem;
+            display: none;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+
+            /* Visual stabilization setup variables */
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        /* Active slide injection animation keyframe target pointer triggers */
+        .project-slider-card.visible {
+            display: grid;
+            animation: slideFadeIn 0.45s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes slideFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.99);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .slider-img-frame {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, var(--gs), var(--ge));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+        }
+
+        .slider-img-frame img,
+        .slider-img-frame video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            display: block;
+        }
+
+        .slider-content-frame {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slider-category {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.4rem;
+        }
+
+        .slider-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .slider-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .slider-tech-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 2rem;
+        }
+
+        .slider-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* ── BUTTONS ── */
+        .btn-primary,
+        .slider-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(74, 111, 165, 0.25);
+        }
+
+        .btn-primary:hover,
+        .slider-link-btn:hover {
+            background: #3b5c8e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(74, 111, 165, 0.35);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            border: 1.5px solid rgba(74, 111, 165, 0.4);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            background: rgba(255, 255, 255, 0.55);
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            background: rgba(74, 111, 165, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .slider-link-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            border: 1.5px solid var(--border);
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            background: transparent;
+            transition: all 0.2s;
+        }
+
+        .slider-link-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-soft);
+            transform: translateY(-2px);
+        }
+
+        .chip {
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-weight: 500;
+            border: 1px solid rgba(74, 111, 165, 0.155);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 2rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .dot.active {
+            opacity: 1;
+            transform: scale(1.2);
+            background: var(--accent);
+        }
+
+        /* ── SKILLS ── */
+        #skills {
+            background: #fff;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin-top: 2.8rem;
+        }
+
+        .skill-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.2rem 2rem;
+            transition: box-shadow 0.25s, transform 0.25s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .skill-card-icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .skill-card-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.6rem;
+        }
+
+        .skill-subtitle {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin: 1rem 0 0.4rem;
+        }
+
+        .skill-subtitle:first-of-type {
+            margin-top: 0;
+        }
+
+        .skill-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .skill-list li {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            padding-left: 14px;
+            position: relative;
+            font-weight: 300;
+        }
+
+        .skill-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-light);
+            font-size: 0.7rem;
+            top: 2px;
+        }
+
+        /* ── CONTACT ── */
+        #contact {
+            background: var(--bg);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+            align-items: start;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            background: #fff;
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--accent-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .contact-value {
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .contact-value a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem 5vw;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s, transform 0.7s;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 968px) {
+            .project-slider-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 1.8rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .about-photo-wrap {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            section {
+                padding: 72px 5vw;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 60px 5vw;
+            }
+
+            .hero-inner {
+                padding: 2rem 5vw 3.5rem;
+            }
+
+            .hero-sub {
+                font-size: 0.93rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .btn-primary,
+            .btn-outline {
+                justify-content: center;
+                padding: 13px 22px;
+                font-size: 0.85rem;
+            }
+
+            .tabs {
+                gap: 6px;
+            }
+
+            .tab-btn {
+                font-size: 0.75rem;
+                padding: 7px 14px;
+            }
+
+            .scroll-hint {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="#home" class="nav-logo">MG</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <section id="home">
+        <div class="hero-inner">
+            <div class="hero-left">
+                <span class="hero-tag">IT Student · Technical Systems &amp; Design</span>
+                <div class="hero-name-wrap">
+                    <h1 class="hero-name">MARK JERALD<br />GALBAN</h1>
+                    <div class="hero-name-echo1" aria-hidden="true">MARK JERALD<br />GALBAN</div>
+                    <div class="hero-name-echo2" aria-hidden="true">MARK JERALD<br />GALBAN</div>
+                </div>
+                <p class="hero-sub">Passionate about engineering clean computing solutions, relational databases, and
+                    adaptive technical software systems. Based in Valenzuela City.</p>
+                <div class="hero-btns">
+                    <a href="#projects" class="btn-primary">
+                        View Projects
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                    <a href="#contact" class="btn-outline">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-visual-card">
+                    <div class="hvc-header">
+                        <div class="hvc-avatar">MG</div>
+                        <div class="hvc-id">
+                            <span class="hvc-name">Mark Jerald Galban</span>
+                            <span class="hvc-role">IT Student · PLV</span>
+                        </div>
+                        <div class="hvc-dot" title="Open to opportunities"></div>
+                    </div>
+                    <div class="hvc-stats">
+                        <div class="hvc-stat"><span class="hvc-stat-num">18</span><span
+                                class="hvc-stat-label">Projects</span></div>
+                        <div class="hvc-stat"><span class="hvc-stat-num">3+</span><span class="hvc-stat-label">Yrs
+                                Study</span></div>
+                        <div class="hvc-stat"><span class="hvc-stat-num">14</span><span
+                                class="hvc-stat-label">Skills</span></div>
+                    </div>
+                    <div>
+                        <p class="hvc-skills-label">Core Technologies</p>
+                        <div class="hvc-chips">
+                            <span class="hvc-chip">PHP &amp; MySQL</span>
+                            <span class="hvc-chip">JavaScript</span>
+                            <span class="hvc-chip">Python</span>
+                            <span class="hvc-chip">React Native</span>
+                            <span class="hvc-chip">Figma</span>
+                            <span class="hvc-chip">Firebase</span>
+                        </div>
+                    </div>
+                    <div class="hvc-bar-section">
+                        <p class="hvc-skills-label">Proficiency</p>
+                        <div class="hvc-bar-row">
+                            <div class="hvc-bar-meta"><span class="hvc-bar-name">Web Development</span><span
+                                    class="hvc-bar-pct">85%</span></div>
+                            <div class="hvc-bar-track">
+                                <div class="hvc-bar-fill" style="width:85%;animation-delay:0.3s"></div>
+                            </div>
+                        </div>
+                        <div class="hvc-bar-row">
+                            <div class="hvc-bar-meta"><span class="hvc-bar-name">UI / UX Design</span><span
+                                    class="hvc-bar-pct">75%</span></div>
+                            <div class="hvc-bar-track">
+                                <div class="hvc-bar-fill" style="width:75%;animation-delay:0.7s"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>Scroll</span>
+            <div class="scroll-dot"></div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="section-inner">
+            <p class="section-tag reveal">Introduction</p>
+            <div class="about-grid">
+                <div class="about-photo-wrap reveal">
+                    <div class="about-deco"></div>
+                    <img src="resources/PortfolioPicture.jfif" alt="Mark Jerald Galban" class="about-photo"
+                        onerror="this.outerHTML='<div class=\'about-photo-placeholder\'><svg width=\'52\' height=\'52\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'#4a6fa5\' stroke-width=\'1.4\'><circle cx=\'12\' cy=\'8\' r=\'4\'/><path d=\'M4 20c0-4 3.6-7 8-7s8 3 8 7\'/></svg><span>Photo not found</span></div>'" />
+                </div>
+                <div class="about-text reveal">
+                    <h2>Who Am I?</h2>
+                    <p>I am a dedicated Information Technology student at Pamantasan ng Lungsod ng Valenzuela with a
+                        strong foundation in software development and database management. I am passionate about
+                        technology's ability to solve real-world problems, enjoying everything from crafting clean user
+                        experiences to developing efficient backend logic.</p>
+                    <p>Through academic projects and collaborative development, I've built a strong foundation in
+                        Designing systems that solve real-world problems. I thrive in collaborative team environments
+                        And am actively seeking an internship opportunity where I can contribute to production-ready
+                        Codebases.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="section-inner">
+            <p class="section-tag reveal">Featured Work</p>
+            <h2 class="section-title reveal">Projects</h2>
+            <p class="section-desc reveal">A modern filtering dashboard representing systems architecture, analytics
+                Frameworks, and experimental media layouts.</p>
+
+            <div class="tabs reveal">
+                <button class="tab-btn active" data-filter="web">Web &amp; Mobile</button>
+                <button class="tab-btn" data-filter="multimedia">Multimedia &amp; Design</button>
+                <button class="tab-btn" data-filter="others">Others</button>
+            </div>
+
+            <div class="subtabs reveal" id="multimediaSubtabs" style="display:none;">
+                <button class="subtab-btn active" data-subfilter="all">All</button>
+                <button class="subtab-btn" data-subfilter="graphic-design">Graphic Design</button>
+                <button class="subtab-btn" data-subfilter="video-edits">Video Edits</button>
+            </div>
+
+            <div class="projects-slider-container reveal">
+
+                <div class="project-slider-card visible" data-cat="web" id="p1">
+                    <div class="slider-img-frame">
+                        <img src="resources/3S+Sense.jpg" alt="3S+ Sense Mobile"
+                            onerror="this.parentElement.innerHTML='📱'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Web &amp; Mobile Systems</p>
+                        <h3 class="slider-title">3S+ Sense Mobile</h3>
+                        <p class="slider-desc">A comprehensive community operations ecosystem tracking local tanod
+                            Dispatch alerts, real-time incident reports, secure resident verification tracking, and
+                            Integrated sentiment evaluation diagnostics.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">React Native</span><span class="chip">Expo</span><span
+                                class="chip">Firebase</span><span class="chip">PHP &amp; SQL</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://3-sense.vercel.app/" target="_blank" class="slider-link-btn">Live
+                                Launch</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="web" id="p2">
+                    <div class="slider-img-frame">
+                        <img src="resources/Quizify.jpg" alt="Quizify" onerror="this.parentElement.innerHTML='📋'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Web Applications</p>
+                        <h3 class="slider-title">Quizify</h3>
+                        <p class="slider-desc">An interactive quiz maker script processing administrative questionnaire
+                            Setups via parameters, secure response logging, and data charting dashboards.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">HTML5 / CSS3</span><span class="chip">PHP Core</span><span
+                                class="chip">JavaScript</span><span class="chip">MySQL</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://github.com/CoolTurtle-cell/survey-quizify" target="_blank"
+                                class="slider-link-btn">View Code</a>
+                            <a href="https://survey-quizify.free.nf/login.php" target="_blank"
+                                class="slider-link-outline">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="web" id="p3">
+                    <div class="slider-img-frame">
+                        <img src="resources/CoffeeFlight.jpg" alt="Coffee Flight Website"
+                            onerror="this.parentElement.innerHTML='☕'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Web &amp; Interface Design</p>
+                        <h3 class="slider-title">Coffee Flight Website</h3>
+                        <p class="slider-desc">A highly responsive business promotion landing model equipped with
+                            Horizontal menu components, consumer evaluation rows, and operational maps.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">HTML5 / CSS3</span><span class="chip">JavaScript Layout</span><span
+                                class="chip">Web Design</span>
+                        </div>
+                        <div class="slider-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="web" id="p4">
+                    <div class="slider-img-frame">
+                        <img src="resources/BorrowIT.jpg" alt="BorrowIT Suhay CE"
+                            onerror="this.parentElement.innerHTML='📦'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Web Engineering</p>
+                        <h3 class="slider-title">BorrowIT Suhay CE</h3>
+                        <p class="slider-desc">An specialized asset inventory tracking mechanism tracking civil
+                            Engineering instrumentation loans, request verifications, and return dates.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">PHP Scripting</span><span class="chip">MySQL Database</span><span
+                                class="chip">Bootstrap Utilities</span>
+                        </div>
+                        <div class="slider-links">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p5">
+                    <div class="slider-img-frame">
+                        <img src="resources/EiffelTower.jpg" alt="Eiffel Tower Manipulation"
+                            onerror="this.parentElement.innerHTML='🗼'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Multimedia &amp; Graphic Design</p>
+                        <h3 class="slider-title">Eiffel Tower Manipulation</h3>
+                        <p class="slider-desc">Layered photo compilation project integrating precision digital image
+                            Tracking scales, typographic text alignment shifts, and custom filters.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Adobe Photoshop</span><span class="chip">Layer Comp</span><span
+                                class="chip">Editorial Assets</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1UwZ7Zkw47NUx_CQkpSRZdcIqbIvi_e6n/view?usp=drive_link"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p6">
+                    <div class="slider-img-frame">
+                        <img src="resources/Silhoutte.jpg" alt="Typography Silhouette"
+                            onerror="this.parentElement.innerHTML='🎭'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Multimedia Layout Systems</p>
+                        <h3 class="slider-title">Typography Silhouette</h3>
+                        <p class="slider-desc">An abstract double-exposure design structure fusing textual parameter
+                            Loops symmetrically onto human outline vectors using advanced digital masking layers.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Photoshop Editor</span><span class="chip">Vector Masks</span><span
+                                class="chip">Digital Art</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1wysev5aoECTjyYD7yDaI20tomxwQ5lvP/view?usp=drive_link"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p8">
+                    <div class="slider-img-frame">
+                        <img src="resources/Minimalist.png" alt="Coffee Minimalist Poster"
+                            onerror="this.parentElement.innerHTML='☕'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Minimalist Graphic Design</p>
+                        <h3 class="slider-title">Coffee Minimalist Poster</h3>
+                        <p class="slider-desc">A product presentation layout utilizing high negative space thresholds
+                            And clean typeface spacing elements to project high product focus cleanly.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Canva Studio</span><span class="chip">Minimalism Typography</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/17nZyONO2g24e5ZJE3-9spG6ckw-K78Uo/view?usp=drive_link"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p9">
+                    <div class="slider-img-frame">
+                        <img src="resources/Profile.jpg" alt="Personal Profile Poster"
+                            onerror="this.parentElement.innerHTML='👤'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Profile &amp; Identity Design</p>
+                        <h3 class="slider-title">Personal Profile Poster</h3>
+                        <p class="slider-desc">Earthy color layout matrix incorporating textured torn-paper edges and
+                            Typographic character cards capturing hobbies, gaming, and animation metrics.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Canva Layouts</span><span class="chip">Identity Poster</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1PT22p8Dz1DX9CFd5DCEBGKskg-LCVqGn/view?usp=drive_link"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p10">
+                    <div class="slider-img-frame">
+                        <img src="resources/BookCover.jpg" alt="Book Cover Design"
+                            onerror="this.parentElement.innerHTML='📖'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Book Cover Design</p>
+                        <h3 class="slider-title">It's Okay to be Not Okay</h3>
+                        <p class="slider-desc">Watercolor background vector framework with centralized titles, textured
+                            Floral elements, and custom canvas sizing parameters.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Canva Print</span><span class="chip">Layout Structure</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1aHsq4aqC7yFS5jFQxNPNQ2Ofwp-cLQPl/view?usp=drive_link"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p11">
+                    <div class="slider-img-frame">
+                        <img src="resources/Grunge.png" alt="Art Is An Explosion"
+                            onerror="this.parentElement.innerHTML='🎨'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Grunge &amp; Experimental Design</p>
+                        <h3 class="slider-title">Art Is An Explosion</h3>
+                        <p class="slider-desc">A rough grunge style layout containing repeating warning textures,
+                            High-contrast monochrome image scales, and distorted font properties.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Photoshop Filters</span><span class="chip">Grunge Styling</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1sgpAy_X_3OPuAv1UlthkPNwy9EgoOdlq/view?usp=drive_link"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p13">
+                    <div class="slider-img-frame">
+                        <img src="resources/MarvelPoster.jpg" alt="Marvel Poster"
+                            onerror="this.parentElement.innerHTML='🦸'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Poster Design</p>
+                        <h3 class="slider-title">Marvel Cinematic Poster</h3>
+                        <p class="slider-desc">Dynamic composite fan creation tracking high action character alignments,
+                            Cinematically calibrated dark tones, and layout scaling properties.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Canva Design</span><span class="chip">Graphic Compilation</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1W1YzgKHEmc3aVezFESwNsnxK4LaBMGy4/view?usp=sharing"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p14">
+                    <div class="slider-img-frame">
+                        <img src="resources/Ballpen.jpg" alt="Ballpen Design"
+                            onerror="this.parentElement.innerHTML='✏️'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Product Graphic Design</p>
+                        <h3 class="slider-title">Ballpen Showcase Layout</h3>
+                        <p class="slider-desc">A clean, marketing-centric product layout setting structural item focal
+                            Anchors, lighting enhancements, and typography positioning.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Canva Layouts</span><span class="chip">Product Display</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1_tN1Tc-7vt0SfOB42zvmB64isrO5qKqt/view?usp=sharing"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p15">
+                    <div class="slider-img-frame">
+                        <img src="resources/DigitalPoster.jpg" alt="Digital Poster"
+                            onerror="this.parentElement.innerHTML='🖼️'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Digital Poster Design</p>
+                        <h3 class="slider-title">Digital Typography Vector</h3>
+                        <p class="slider-desc">A high-contrast digital promotional composition testing multiple layer
+                            Styles, clipping paths, and tracking metrics to deliver clear messaging layout arrays.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Photoshop System</span><span class="chip">Digital Compositing</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1bjCECThDfcR4ntF5_FhiZ3Z1q2RgWrw5/view?usp=sharing"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p16">
+                    <div class="slider-img-frame">
+                        <img src="resources/Flower.jpg" alt="Flower Design"
+                            onerror="this.parentElement.innerHTML='🌸'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Nature &amp; Floral Design</p>
+                        <h3 class="slider-title">Organic Botanical Vectors</h3>
+                        <p class="slider-desc">Soft chromatic balancing layouts analyzing organic symmetrical tracking
+                            Structures to formulate elegant print configurations.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Canva Asset</span><span class="chip">Color Theory Studio</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1hGPWMMzzbcqpq8Ne-BBBrg4ku0CpIDSA/view?usp=sharing"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p17">
+                    <div class="slider-img-frame">
+                        <img src="resources/JoseRizalPoster.jpg" alt="Jose Rizal Poster"
+                            onerror="this.parentElement.innerHTML='🇵🇭'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Historical Tribute Design</p>
+                        <h3 class="slider-title">Jose Rizal Memorial Layout</h3>
+                        <p class="slider-desc">A custom tribute layout tracking national historic properties, mixing
+                            Distressed color grading maps with classic vector line definitions.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Canva Systems</span><span class="chip">Tribute Graphics</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1weaXLls1_3fjgqxr_QDZ5clcP2b4T7bv/view?usp=sharing"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="graphic-design" id="p18">
+                    <div class="slider-img-frame">
+                        <img src="resources/SchoolBrochure.jpg" alt="School Brochure"
+                            onerror="this.parentElement.innerHTML='📰'" />
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Print &amp; Layout Design</p>
+                        <h3 class="slider-title">Institutional Informational Brochure</h3>
+                        <p class="slider-desc">Multi-panel informational layout mapping distinct typographic grids, logo
+                            Safe margins, and corporate branding tones for school printing specifications.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Canva Print Engine</span><span class="chip">Brochure Geometry</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1yotYdT1594ASHfQoiuE742hdEAJJ-AI0/view?usp=sharing"
+                                target="_blank" class="slider-link-btn">Open Drive Asset</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="multimedia" data-sub="video-edits" id="p12">
+                    <div class="slider-img-frame" style="padding:0;overflow:hidden;">
+                        <video src="resources/PromotionalVideo.mp4" muted loop preload="metadata"></video>
+                    </div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Video Production</p>
+                        <h3 class="slider-title">Promotional Motion Video</h3>
+                        <p class="slider-desc">A premium commercial video compilation implementing linear motion
+                            Properties, dynamic cut frameworks, and fluid transition pacing scales.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">Video Editing</span><span class="chip">Motion Design</span><span
+                                class="chip">Cinematic Pacing</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="https://drive.google.com/file/d/1pWyhLWuTX5sMSIzvRZe3Pi_nEkGjHchz/view?usp=drive_link"
+                                target="_blank" class="slider-link-btn">Open Drive Video</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-slider-card" data-cat="others" id="p7">
+                    <div class="slider-img-frame">🔧</div>
+                    <div class="slider-content-frame">
+                        <p class="slider-category">Infrastructure &amp; Systems Support</p>
+                        <h3 class="slider-title">PC Assembly &amp; Diagnostics</h3>
+                        <p class="slider-desc">Technical logging documenting actual work immersion hardware builds,
+                            System diagnostics, parts disassembly matrices, and network routing workstation setups.</p>
+                        <div class="slider-tech-box">
+                            <span class="chip">PC Assembly</span><span class="chip">Hardware Diagnostics</span><span
+                                class="chip">IT Operations Logistics</span>
+                        </div>
+                        <div class="slider-links">
+                            <a href="#" class="slider-link-btn">View Log Records</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-inner">
+            <p class="section-tag reveal">Expertise Fields</p>
+            <h2 class="section-title reveal">Technical Toolkit</h2>
+            <p class="section-desc reveal">A functional map organizing engineering capabilities and software suites
+                Cleanly.</p>
+            <div class="skills-grid reveal">
+                <div class="skill-card">
+                    <h3 class="skill-card-title">Systems &amp; Development</h3>
+                    <p class="skill-subtitle">Core Programming</p>
+                    <ul class="skill-list">
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>C++</li>
+                    </ul>
+                    <p class="skill-subtitle">Front-End Foundations</p>
+                    <ul class="skill-list">
+                        <li>HTML / CSS</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3 class="skill-card-title">Database &amp; Analytics</h3>
+                    <p class="skill-subtitle">Relational Databases</p>
+                    <ul class="skill-list">
+                        <li>SQL / MySQL</li>
+                        <li>PHP</li>
+                    </ul>
+                    <p class="skill-subtitle">Data &amp; Operations</p>
+                    <ul class="skill-list">
+                        <li>MS Excel</li>
+                        <li>Firebase</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3 class="skill-card-title">Tech Support &amp; Infra</h3>
+                    <p class="skill-subtitle">IT Infrastructure</p>
+                    <ul class="skill-list">
+                        <li>PC Assembly</li>
+                        <li>Hardware Troubleshooting</li>
+                        <li>Basic Networking</li>
+                    </ul>
+                    <p class="skill-subtitle">Design Studio</p>
+                    <ul class="skill-list">
+                        <li>Figma</li>
+                        <li>Canva</li>
+                        <li>GitHub</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-inner">
+            <p class="section-tag reveal">Let's Connect</p>
+            <h2 class="section-title reveal">Get In Touch</h2>
+            <p class="section-desc reveal">Have a question, an internship opportunity, or just want to say hello?</p>
+            <div class="contact-grid">
+                <form class="contact-form reveal" id="portfolioContactForm" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Type your message here..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" id="submitBtn" class="btn-primary" style="width:fit-content;">
+                        <span id="btnText">Send Message</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                        </svg>
+                    </button>
+                    <p id="form-msg" style="font-size:0.85rem; display:none; margin-top:0.4rem; font-weight:500;"></p>
+                </form>
+                <div class="contact-info reveal">
+                    <div class="contact-item">
+                        <div>
+                            <p class="contact-label">Email</p>
+                            <p class="contact-value"><a
+                                    href="mailto:galbanmarkjerald@gmail.com">galbanmarkjerald@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div>
+                            <p class="contact-label">Phone</p>
+                            <p class="contact-value">+63 976 529 8345</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div>
+                            <p class="contact-label">LinkedIn</p>
+                            <p class="contact-value"><a
+                                    href="https://www.linkedin.com/in/mark-jerald-galban-918110411?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                                    target="_blank">linkedin.com/in/mark-jerald-galban-918110411</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div>
+                            <p class="contact-label">GitHub</p>
+                            <p class="contact-value"><a href="https://github.com/CoolTurtle-cell"
+                                    target="_blank">github.com/CoolTurtle-cell</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div>
+                            <p class="contact-label">Location</p>
+                            <p class="contact-value">Valenzuela City, Philippines</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Mark Jerald Galban · In Him all things hold together. (Colossians 1:17)</p>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('navToggle');
+        const links = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => { toggle.classList.toggle('open'); links.classList.toggle('open'); });
+        links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { toggle.classList.remove('open'); links.classList.remove('open'); }));
+
+        const sections = document.querySelectorAll('section[id]');
+        const navAs = document.querySelectorAll('.nav-links a');
+        sections.forEach(s => {
+            new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        navAs.forEach(a => a.classList.remove('active'));
+                        const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+                        if (a) a.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-40% 0px -55% 0px' }).observe(s);
+        });
+
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        // Slider States & Variables
+        let activeIndex = 0, visibleCards = [], activeSubFilter = 'all';
+        let autoSliderInterval = null;
+
+        // ── AUTOMATIC SLIDER INTERVAL CONTROLLER ENGINE ──
+        function startAutoSliderTimer() {
+            stopAutoSliderTimer(); // Prevent duplicating running thread pools
+            autoSliderInterval = setInterval(() => {
+                if (visibleCards.length > 1) {
+                    activeIndex = (activeIndex + 1) % visibleCards.length;
+                    updateSliderCarousel(false); // Advance silently without killing loops
+                }
+            }, 3000); // 3 Seconds Interval Bounds
+        }
+
+        function stopAutoSliderTimer() {
+            if (autoSliderInterval) {
+                clearInterval(autoSliderInterval);
+                autoSliderInterval = null;
+            }
+        }
+
+        function updateSliderCarousel(isManualClick = false) {
+            // Disengage background timer thread if a physical person interacts with the controls
+            if (isManualClick) {
+                stopAutoSliderTimer();
+            }
+
+            document.querySelectorAll('.project-slider-card').forEach(c => {
+                c.classList.remove('visible');
+                const video = c.querySelector('video');
+                if (video) video.pause();
+            });
+            if (!visibleCards.length) return;
+            if (activeIndex >= visibleCards.length) activeIndex = 0;
+
+            const currentCard = visibleCards[activeIndex];
+            currentCard.classList.add('visible');
+
+            const activeVideo = currentCard.querySelector('video');
+            if (activeVideo) activeVideo.play().catch(() => { });
+
+            const dotsContainer = document.getElementById('carouselDots');
+            dotsContainer.innerHTML = '';
+            visibleCards.forEach((_, idx) => {
+                const dot = document.createElement('div');
+                dot.className = `dot ${idx === activeIndex ? 'active' : ''}`;
+                dot.addEventListener('click', () => {
+                    activeIndex = idx;
+                    updateSliderCarousel(true); // Engages user hard disengage break
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function getMultimediaCards() {
+            const all = Array.from(document.querySelectorAll('.project-slider-card[data-cat="multimedia"]'));
+            if (activeSubFilter === 'all') return all;
+            return all.filter(c => c.dataset.sub === activeSubFilter);
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                const subPanel = document.getElementById('multimediaSubtabs');
+                if (filter === 'multimedia') {
+                    subPanel.style.display = 'flex';
+                    activeSubFilter = 'all';
+                    document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelector('.subtab-btn[data-subfilter="all"]').classList.add('active');
+                    visibleCards = getMultimediaCards();
+                } else {
+                    subPanel.style.display = 'none';
+                    visibleCards = Array.from(document.querySelectorAll(`.project-slider-card[data-cat="${filter}"]`));
+                }
+                activeIndex = 0;
+                updateSliderCarousel(false);
+                startAutoSliderTimer(); // Spin up refreshing timer bounds for fresh collection mapping
+            });
+        });
+
+        document.querySelectorAll('.subtab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeSubFilter = btn.dataset.subfilter;
+                visibleCards = getMultimediaCards();
+                activeIndex = 0;
+                updateSliderCarousel(false);
+                startAutoSliderTimer(); // Cycle reset on sub category mapping switches
+            });
+        });
+
+        function initProjectDashboard() {
+            const defaultBtn = document.querySelector('.tab-btn.active');
+            if (defaultBtn) {
+                visibleCards = Array.from(document.querySelectorAll(`.project-slider-card[data-cat="${defaultBtn.dataset.filter}"]`));
+                updateSliderCarousel(false);
+                startAutoSliderTimer(); // Ignite dashboard background looping timeline execution
+            }
+        }
+        initProjectDashboard();
+
+        // ── UPDATED FORM PROCESSING SUBMISSION LOGIC WITH FORMSPREE AJAX FETCH ──
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const msgStatus = document.getElementById('form-msg');
+
+            // Set loading state UI shifts
+            submitBtn.disabled = true;
+            btnText.innerText = "Sending...";
+
+            // UPDATED: Connected your active unique account Formspree token endpoint
+            const formspreeEndpoint = "https://formspree.io/f/xlgvojna";
+            const formData = new FormData(form);
+
+            fetch(formspreeEndpoint, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // Render Dynamic Success Output Status
+                        msgStatus.style.color = "var(--accent)";
+                        msgStatus.innerText = "✓ Message sent! I'll get back to you soon.";
+                        msgStatus.style.display = 'block';
+                        form.reset();
+                    } else {
+                        // Capture explicit engine response problems safely
+                        response.json().then(data => {
+                            if (Object.hasOwn(data, 'errors')) {
+                                msgStatus.innerText = "✕ " + data.errors.map(error => error.message).join(", ");
+                            } else {
+                                msgStatus.innerText = "✕ Oops! There was a problem submitting your form.";
+                            }
+                            msgStatus.style.color = "#d93838";
+                            msgStatus.style.display = 'block';
+                        });
+                    }
+                })
+                .catch(error => {
+                    // Catch localized physical connection breakages cleanly
+                    msgStatus.style.color = "#d93838";
+                    msgStatus.innerText = "✕ Network error. Please try again later or email me directly.";
+                    msgStatus.style.display = 'block';
+                })
+                .finally(() => {
+                    // Return structural context tags back to native parameters
+                    submitBtn.disabled = false;
+                    btnText.innerText = "Send Message";
+                });
+        }
+    </script>
+</body>
+
+</html>
